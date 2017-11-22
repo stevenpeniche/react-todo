@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 
 class ToDo extends Component {
+	strikeIfComplete(isCompleted) {
+		if(isCompleted) {
+			return <strike>{ this.props.description }</strike>
+		}
+		return this.props.description
+	}
+
+	changeButtonIfComplete(isCompleted) {
+		if(isCompleted) {
+			return <strong>Not Completed</strong>
+		}
+		return <strong>Completed</strong>
+	}
+
 	render() {
 		return (
-			<li>
-				<input type="checkbox" checked={ this.props.isCompleted } onChange={ this.props.toggleComplete }/>
-				<span>{ this.props.description }</span>
-				<button type='button' onClick={ this.props.deleteTodo }>Delete</button>
+			<li className="card">
+				<header className="card-header">
+					<p className="card-header-title">{ this.strikeIfComplete(this.props.isCompleted) }</p>
+				</header>
+				<footer className="card-footer">
+					<a type='button' onClick={ this.props.toggleComplete } className="card-footer-item">
+						{ this.changeButtonIfComplete(this.props.isCompleted) }
+					</a>
+					<a type='button' onClick={ this.props.deleteTodo } className="card-footer-item">
+						<font color="red"><strong>Delete</strong></font>
+					</a>
+				</footer>
 			</li>
 		)
 	}

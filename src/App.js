@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import ToDo from './components/ToDo.js'
 
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -41,15 +42,33 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-				<ul>
-					{ this.state.todos.map( (todo, index) =>
-						<ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
-					)}
-				</ul>
-				<form onSubmit={ (e) => this.handleSubmit(e) }>
-					<input type="text" value={ this.state.newTodoDescription } onChange={ (e) => this.handleChange(e) }/>
-					<input type="submit" />
-				</form>
+				<section className="section">
+					<div className="container">
+						<p className="subtitle is-3 has-text-centered"> What would you like to</p>
+						<p className="title is-1 has-text-centered">Doo <span role="img" aria-label="poop emoji">💩</span> Doo?</p>
+					</div>
+				</section>
+				<section className="section">
+					<div className="container is-fluid">
+						<ul className="todos container">
+							{ this.state.todos.map( (todo, index) =>
+								<ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
+							)}
+						</ul>
+						<div className="submit-todo-form columns is-mobile is-centered">
+							<input type="text"
+								value={ this.state.newTodoDescription }
+								onChange={ (e) => this.handleChange(e) }
+								placeholder="Enter a doo.."
+								className="column is-two-thirds input is-success"
+							/>
+							<input type="submit"
+								value="Save" onClick={ (e) => this.handleSubmit(e) }
+								className="coulmn button is-success"
+							/>
+						</div>
+					</div>
+				</section>
 			</div>
     );
   }
