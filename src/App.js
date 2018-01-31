@@ -26,9 +26,15 @@ class App extends Component {
 
   componentDidMount() {
     this.todosRef.on('child_added', snapshot => {
-			const todo = snapshot.val();
-			this.setState({ todos: this.state.todos.concat( todo ) })
+			let todo = snapshot.val();
+      todo.key = snapshot.key;
+			this.setState({ todos: [...this.state.todos, todo]});
 		});
+    this.todosRef.on('child_removed', snapshot => {
+      const key = snapshot.key;
+      const filtered = this.state.todos.filter(todo => todo.key !== key);
+      this.setState({ todos: filtered });
+    });
   }
 
 	handleChange(e) {
@@ -50,9 +56,8 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
-	deleteTodo(index) {
-		const todos = this.state.todos.filter( (todo) => todo !== this.state.todos[index])
-		this.setState({ todos: todos })
+	deleteTodo(todo) {
+		firebase.database().ref('todos').child(todo.key).remove();
 	}
 
   render() {
@@ -68,7 +73,7 @@ class App extends Component {
 					<div className="container is-fluid">
 						<ul className="todos container">
 							{ this.state.todos.map( (todo, index) =>
-								<ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
+								<ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(todo) }/>
 							)}
 						</ul>
             <form className="submit-todo-form columns is-mobile is-centered">
