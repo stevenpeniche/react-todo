@@ -1,20 +1,35 @@
 import React, { Component } from 'react';
 import './App.css';
 import ToDo from './components/ToDo.js'
+import * as firebase from 'firebase';
 
+// Initialize Firebase
+let config = {
+  apiKey: "AIzaSyAJ05asgcCpJ-eCdBjV-2Q_Gkap-Ekcb0s",
+  authDomain: "to-doo-doo.firebaseapp.com",
+  databaseURL: "https://to-doo-doo.firebaseio.com",
+  projectId: "to-doo-doo",
+  storageBucket: "to-doo-doo.appspot.com",
+  messagingSenderId: "566741183408"
+};
+firebase.initializeApp(config);
 
 class App extends Component {
 	constructor(props) {
 		super(props);
+    this.todosRef = firebase.database().ref('todos')
 		this.state = {
-			todos: [
-				{ description: 'Walk the cat', isCompleted: true },
-				{ description: 'Throw the dishes away', isCompleted: false },
-				{ description: 'Buy new dishes', isCompleted: false }
-			],
+			todos: [],
 			newTodoDescription: ''
 		};
 	}
+
+  componentDidMount() {
+    this.todosRef.on('child_added', snapshot => {
+			const todo = snapshot.val();
+			this.setState({ todos: this.state.todos.concat( todo ) })
+		});
+  }
 
 	handleChange(e) {
 		this.setState({ newTodoDescription: e.target.value })
