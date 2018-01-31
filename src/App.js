@@ -39,7 +39,8 @@ class App extends Component {
 		e.preventDefault();
 		if (!this.state.newTodoDescription) { return }
 		const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
-    this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+    firebase.database().ref('todos').push(newTodo);
+    this.setState({ newTodoDescription: '' });
 	}
 
 	toggleComplete(index) {
@@ -70,18 +71,18 @@ class App extends Component {
 								<ToDo key={ index } description={ todo.description } isCompleted={ todo.isCompleted } toggleComplete={ () => this.toggleComplete(index) } deleteTodo={ () => this.deleteTodo(index) }/>
 							)}
 						</ul>
-						<div className="submit-todo-form columns is-mobile is-centered">
-							<input type="text"
-								value={ this.state.newTodoDescription }
-								onChange={ (e) => this.handleChange(e) }
-								placeholder="Enter a doo.."
-								className="column is-two-thirds input is-success"
-							/>
-							<input type="submit"
-								value="Save" onClick={ (e) => this.handleSubmit(e) }
-								className="coulmn button is-success"
-							/>
-						</div>
+            <form className="submit-todo-form columns is-mobile is-centered">
+              <input type="text"
+                value={ this.state.newTodoDescription }
+                onChange={ (e) => this.handleChange(e) }
+                placeholder="Enter a doo.."
+                className="column is-two-thirds input is-success"
+              />
+              <input type="submit"
+                value="Save" onClick={ (e) => this.handleSubmit(e) }
+                className="coulmn button is-success"
+              />
+            </form>
 					</div>
 				</section>
 			</div>
