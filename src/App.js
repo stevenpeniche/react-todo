@@ -80,7 +80,7 @@ class App extends Component {
       <div style={{maxWidth: "1160px", margin: "0 auto"}}>
         <BrowserRouter>
           <div className="App">
-            <NavBar authenticated={this.state.authenticated}/>
+            <NavBar authenticated={this.state.authenticated} currentUser={this.state.currentUser}/>
             <section className="section">
               <div className="container">
                 <p className="subtitle is-3 has-text-centered"> What would you like to</p>
