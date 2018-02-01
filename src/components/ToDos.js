@@ -27,6 +27,7 @@ class ToDos extends Component {
 	toggleComplete(index) {
     const todos = this.state.todos.slice();
     const todo = todos[index];
+    console.log(todos);
     todo.isCompleted = todo.isCompleted ? false : true;
     this.setState({ todos: todos });
   }
@@ -38,8 +39,10 @@ class ToDos extends Component {
   componentDidMount() {
     this.todosRef.on('child_added', snapshot => {
       let todo = snapshot.val();
-      todo.key = snapshot.key;
-      this.setState({ todos: [...this.state.todos, todo]});
+      if(todo.user_id === this.props.currentUser.uid) {
+        todo.key = snapshot.key;
+        this.setState({ todos: [...this.state.todos, todo]});
+      }
     });
     this.todosRef.on('child_removed', snapshot => {
       const key = snapshot.key;
