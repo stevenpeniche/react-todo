@@ -77,11 +77,11 @@ class App extends Component {
     }
 
     return (
-      <div style={{maxWidth: "1160px", margin: "0 auto"}}>
+      <div className="App">
         <BrowserRouter>
-          <div className="App">
+          <div >
             <NavBar authenticated={this.state.authenticated} currentUser={this.state.currentUser}/>
-            <section className="section">
+            <section className="what-would-you section">
               <div className="container">
                 <p className="subtitle is-3 has-text-centered"> What would you like to</p>
                 <p className="title is-1 has-text-centered">Doo <span role="img" aria-label="poop emoji">💩</span> Doo?</p>
