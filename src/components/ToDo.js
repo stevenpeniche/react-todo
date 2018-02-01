@@ -10,9 +10,10 @@ class ToDo extends Component {
 
 	changeButtonIfComplete(isCompleted) {
 		if(isCompleted) {
-			return <strong>Not Completed</strong>
-		}
-		return <strong>Completed</strong>
+      return <strong>Completed</strong>
+		} else {
+      return <strong>Not Completed</strong>
+    }
 	}
 
 	render() {

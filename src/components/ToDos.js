@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Toaster, Intent } from '@blueprintjs/core';
 import { Spinner } from '@blueprintjs/core';
 import ToDo from './ToDo';
 
@@ -27,9 +28,10 @@ class ToDos extends Component {
 	toggleComplete(index) {
     const todos = this.state.todos.slice();
     const todo = todos[index];
-    console.log(todos);
     todo.isCompleted = todo.isCompleted ? false : true;
-    this.setState({ todos: todos });
+    this.props.database.ref('todos').child(todo.key).set(todo).then((success) => {
+      this.setState({ todos: todos });
+    }, (error) => this.toaster.show({ intent: Intent.WARNING, message: "Try setting completition again" }))
   }
 
 	deleteTodo(todo) {
@@ -63,6 +65,7 @@ class ToDos extends Component {
 
     return (
       <section className="section">
+        <Toaster ref={(element) => { this.toaster = element }} />
         <div className="container is-fluid">
           <ul className="todos container">
             {this.state.todos.filter(todo =>
