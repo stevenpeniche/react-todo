@@ -21,6 +21,20 @@ class App extends Component {
 		};
 	}
 
+  setCurrentUser(user) {
+    if (user) {
+      this.setState({
+        currentUser: user,
+        authenticated: true
+      })
+    } else {
+      this.setState({
+        currentUser: null,
+        authenticated: false
+      })
+    }
+  }
+
   componentDidMount() {
     this.todosRef.on('child_added', snapshot => {
 			let todo = snapshot.val();
@@ -39,11 +53,13 @@ class App extends Component {
       if(user) {
         this.setState({
           authenticated: true,
+          currentUser: user,
           loading: false
         })
       } else {
         this.setState({
           authenticated: false,
+          currentUser: null,
           loading: false
         })
       }
@@ -54,20 +70,6 @@ class App extends Component {
     this.removeAuthListener();
   }
 
-  setCurrentUser(user) {
-    if (user) {
-      this.setState({
-        currentUser: user,
-        authenticated: true
-      })
-    } else {
-      this.setState({
-        currentUser: null,
-        authenticated: false
-      })
-    }
-  }
-
 	handleChange(e) {
 		this.setState({ newTodoDescription: e.target.value })
 	}
@@ -75,7 +77,7 @@ class App extends Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		if (!this.state.newTodoDescription) { return }
-		const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
+		const newTodo = { user_id: String(this.state.currentUser.uid), description: this.state.newTodoDescription, isCompleted: false };
     database.ref('todos').push(newTodo);
     this.setState({ newTodoDescription: '' });
 	}
@@ -118,14 +120,19 @@ class App extends Component {
               <section className="section">
                 <div className="container is-fluid">
                   <ul className="todos container">
-                    { this.state.todos.map( (todo, index) =>
-                      <ToDo
-                        key={ index }
-                        description={ todo.description }
-                        isCompleted={ todo.isCompleted }
-                        toggleComplete={ () => this.toggleComplete(index) }
-                        deleteTodo={ () => this.deleteTodo(todo) }
-                      />
+                    { this.state.todos.map( (todo, index) => {
+                        if (todo.user_id === String(this.state.currentUser.uid)) {
+                            return (
+                              <ToDo
+                                key={ index }
+                                description={ todo.description }
+                                isCompleted={ todo.isCompleted }
+                                toggleComplete={ () => this.toggleComplete(index) }
+                                deleteTodo={ () => this.deleteTodo(todo) }
+                              />
+                            )
+                        }
+                      }
                     )}
                   </ul>
                   <form className="submit-todo-form columns is-mobile is-centered">
