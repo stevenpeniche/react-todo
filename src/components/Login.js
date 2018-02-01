@@ -67,8 +67,10 @@ class Login extends Component {
   }
 
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+
     if (this.state.redirect === true) {
-      return <Redirect to="/" />
+      return <Redirect to={from} />
     }
 
     return (
@@ -92,7 +94,7 @@ class Login extends Component {
             <input style={{width: "100%"}} type="submit" className="button is-primary" value="Log In"></input>
           </form>
       </div>
-    );
+    )
   }
 }
 
