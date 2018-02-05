@@ -25,13 +25,15 @@ class ToDos extends Component {
     this.setState({ newTodoDescription: '' });
 	}
 
-	toggleComplete(index) {
-    const todos = this.state.todos.slice();
-    const todo = todos[index];
-    todo.isCompleted = todo.isCompleted ? false : true;
-    this.props.database.ref('todos').child(todo.key).set(todo).then((success) => {
-      this.setState({ todos: todos });
-    }, (error) => this.toaster.show({ intent: Intent.WARNING, message: "Try setting completition again" }))
+	toggleComplete(index, e) {
+    if(e.target.className !== 'delete-button delete') {
+      const todos = this.state.todos.slice();
+      const todo = todos[index];
+      todo.isCompleted = todo.isCompleted ? false : true;
+      this.props.database.ref('todos').child(todo.key).set(todo).then((success) => {
+        this.setState({ todos: todos });
+      }, (error) => this.toaster.show({ intent: Intent.WARNING, message: "Try setting completition again" }))
+    }
   }
 
 	deleteTodo(todo) {
@@ -76,7 +78,7 @@ class ToDos extends Component {
                   key={ index }
                   description={ todo.description }
                   isCompleted={ todo.isCompleted }
-                  toggleComplete={ () => this.toggleComplete(index) }
+                  toggleComplete={ (e) => this.toggleComplete(index, e) }
                   deleteTodo={ () => this.deleteTodo(todo) }
                 />
               )

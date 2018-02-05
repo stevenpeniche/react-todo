@@ -3,33 +3,20 @@ import React, { Component } from 'react';
 class ToDo extends Component {
 	strikeIfComplete(isCompleted) {
 		if(isCompleted) {
-			return <strike>{ this.props.description }</strike>
+			return <font style={{"color": "#808080"}}><strike>{ this.props.description }</strike></font>
 		}
 		return this.props.description
 	}
 
-	changeButtonIfComplete(isCompleted) {
-		if(isCompleted) {
-      return <strong>Completed</strong>
-		} else {
-      return <strong>Not Completed</strong>
-    }
-	}
-
 	render() {
 		return (
-			<li className="card">
-				<header className="card-header">
-					<p className="card-header-title">{ this.strikeIfComplete(this.props.isCompleted) }</p>
-				</header>
-				<footer className="card-footer">
-					<a type='button' onClick={ this.props.toggleComplete } className="card-footer-item">
-						{ this.changeButtonIfComplete(this.props.isCompleted) }
-					</a>
-					<a type='button' onClick={ this.props.deleteTodo } className="card-footer-item">
-						<font color="red"><strong>Delete</strong></font>
-					</a>
-				</footer>
+			<li className="todo box" onClick={ this.props.toggleComplete }>
+        <div className="delete-button-container">
+          <button type='button' onClick={ this.props.deleteTodo } className="delete-button delete" />
+        </div>
+				<p className="todo-description">
+          { this.strikeIfComplete(this.props.isCompleted) }
+        </p>
 			</li>
 		)
 	}

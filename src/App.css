@@ -1,9 +1,29 @@
-.card {
-	margin-bottom: 10px;
+.navbar-brand {
+  padding-left: 8px;
+}
+
+.what-would-you {
+  padding-top: 80px;
+  padding-bottom: 10px;
 }
 
 .todos {
 	max-width: 60%;
+  padding: 0;
+	margin-bottom: 10px;
+}
+
+.delete-button-container {
+  text-align: right;
+}
+
+.delete-button {
+  position: relative;
+}
+
+.todo-description {
+  text-align: center;
+  font-size: 1.8rem;
 }
 
 .submit-todo-form {
@@ -12,13 +32,4 @@
 
 .input {
 	margin-right: 5px;
-}
-
-.what-would-you {
-  padding-top: 80px;
-  padding-bottom: 10px;
-}
-
-.navbar-brand {
-  padding-left: 8px;
 }
