@@ -69,7 +69,7 @@ class App extends Component {
   render() {
     if (this.state.loading === true) {
       return (
-        <div style={{ textAlign: "center", position: "absolute", top: "25%", left: "50%" }}>
+        <div className="spinner">
           <h3>Loading</h3>
           <Spinner />
         </div>

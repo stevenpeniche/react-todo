@@ -1,3 +1,10 @@
+.spinner {
+  text-align: center;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+}
+
 .navbar-brand {
   padding-left: 8px;
 }
@@ -19,6 +26,7 @@
 
 .delete-button-container {
   text-align: right;
+  margin-bottom: 10px;
 }
 
 .delete-button {
@@ -32,6 +40,7 @@
 
 .submit-todo-form {
 	padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .input {
@@ -39,6 +48,10 @@
 }
 
 @media only screen and (max-width: 415px) {
+  .spinner {
+    left: 40%
+  }
+
 	.todo-description {
     font-size: 1.5rem;
   }
