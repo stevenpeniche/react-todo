@@ -66,7 +66,7 @@ class ToDos extends Component {
     }
 
     return (
-      <section className="section">
+      <section className="todos-section section">
         <Toaster ref={(element) => { this.toaster = element }} />
         <div className="container is-fluid">
           <ul className="todos container">
