@@ -6,4 +6,4 @@ A To-do web application built using:
 - React Router
 - Firebase Realtime Database & User Authentication
 - Bulma
-- Blurprint 
+- Blueprint 
