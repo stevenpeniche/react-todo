@@ -1,5 +1,6 @@
 # To Doo Doo
-## [Live Demo](https://to-doo-doo.netlify.com)
+**[Live Demo](https://to-doo-doo.netlify.com)**  
+
 A To-do web application built using:
 - React
 - React Router
