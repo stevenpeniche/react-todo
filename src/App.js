@@ -100,6 +100,18 @@ class App extends Component {
               database={database}
               component={ToDos}
             />
+          <Route exact path="/privacy-policy" render={() => {
+              return (
+                <div className="privacy-policy container is-fluid">
+                  <h2>What information do we collect?</h2>
+                  <p>We collect your email information either through our sign up form or through   facebook’s user authentication api and store it so you many login to the site and manipulate your created content</p>
+                  <h2>How do we use that information?</h2>
+                  <p>We use your email and or full name to personalize your user experience and associate your created content to your user account</p>
+                  <h2>What information do we share?</h2>
+                  <p>We store your information in a google firebase realtime database.</p>
+                </div>
+              )
+            }} />
   			  </div>
         </BrowserRouter>
       </div>

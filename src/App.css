@@ -47,6 +47,15 @@
 	margin-right: 5px;
 }
 
+.privacy-policy {
+  width: 50%;
+  text-align: center;
+}
+
+.privacy-policy-link {
+  text-align: center;
+}
+
 @media only screen and (max-width: 415px) {
   .spinner {
     left: 40%

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Toaster, Intent } from '@blueprintjs/core';
 import { app, facebookProvider } from '../base';
 
@@ -94,6 +94,10 @@ class Login extends Component {
             </label>
             <input style={{width: "100%"}} type="submit" className="button is-primary" value="Log In"></input>
           </form>
+          <hr style={{marginTop: "10px", marginBottom: "10px"}}/>
+          <div className="privacy-policy-link">
+            <Link to="/privacy-policy" className="privacy-policy-link">Privacy Policy</Link>
+          </div>
         </div>
       </div>
     )
