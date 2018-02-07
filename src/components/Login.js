@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { Toaster, Intent } from '@blueprintjs/core';
 import { app, facebookProvider } from '../base';
 
+
 const loginStyles = {
   width: "90%",
   maxWidth: "315px",
